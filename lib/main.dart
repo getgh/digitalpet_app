@@ -29,7 +29,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   @override
   void initState() {
     super.initState();
-    // Start timer to increase hunger and update happiness
+    // timer to + hunger and update the happiness
     hungerTimer = Timer.periodic(Duration(seconds: 30), (timer) {
       setState(() {
         hungerLevel = (hungerLevel + 5).clamp(0, 100);
@@ -38,7 +38,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       });
     });
 
-    // Timer to decrease happiness if not played with
+    // time to decrease happiness if user inactive
     happinessTimer = Timer.periodic(Duration(seconds: 20), (timer) {
       setState(() {
         final timeSinceLastPlay = DateTime.now().difference(lastPlayTime);
@@ -49,7 +49,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       });
     });
 
-    // Check win condition every 10 seconds
+    // chkwin condition every 10s
     winCheckTimer = Timer.periodic(Duration(seconds: 10), (timer) {
       _checkWinLossCondition();
     });
@@ -86,11 +86,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
 
   void _checkWinLossCondition() {
     setState(() {
-      // Win if happiness stays high and hunger stays low
+      // winning if happiness stays top and hunger stays low
       if (happinessLevel >= 80 && hungerLevel <= 30) {
         gameWon = true;
       }
-      // Lose if either condition is met
+      // lose
       if (hungerLevel >= 90 || happinessLevel <= 10) {
         gameLost = true;
       }
@@ -189,7 +189,6 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                         color: _getPetColor().withOpacity(0.2),
                       ),
                     ),
-                    // Mood ring
                     Container(
                       width: 180,
                       height: 180,
@@ -201,7 +200,6 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                         ),
                       ),
                     ),
-                    // Pet image
                     ClipOval(
                       child: Container(
                         width: 160,
